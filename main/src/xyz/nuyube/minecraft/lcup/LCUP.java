@@ -16,7 +16,7 @@ public class LCUP extends JavaPlugin {
     //Start our plugin logger
     PluginLogger = getLogger();
     //Check for updates
-    new UpdateChecker(this, 91031)
+    new UpdateChecker(this, 91103)
       .getVersion(
           version -> {
             if (

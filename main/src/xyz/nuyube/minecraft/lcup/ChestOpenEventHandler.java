@@ -34,8 +34,7 @@ public class ChestOpenEventHandler implements Listener {
                         ((Chest)dci.getHolder().getLeftSide()).close();
                         ((Chest)dci.getHolder().getRightSide()).close();
                     }
-                    p.openInventory(i);
-                    c.
+                    p.openInventory(i); 
                     c.close();
                     
                 } 
