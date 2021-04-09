@@ -2,10 +2,8 @@ package xyz.nuyube.minecraft.lcup;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
-import org.bukkit.block.DoubleChest;
-import org.bukkit.block.Sign;
-import org.bukkit.block.data.Attachable;
+import org.bukkit.block.Chest; 
+import org.bukkit.block.Sign; 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,8 +20,7 @@ public class ChestOpenEventHandler implements Listener {
             Block clickedBlock = event.getClickedBlock();
             Player p = event.getPlayer();
             if(clickedBlock.getState() instanceof Sign) {
-                event.setCancelled(true);
-                Sign S = (Sign)clickedBlock.getState();
+                 Sign S = (Sign)clickedBlock.getState();
                 Directional a = (Directional)S.getBlockData();
                 Block Attached = clickedBlock.getRelative(a.getFacing().getOppositeFace());
                 if(Attached.getType() == Material.CHEST) {
