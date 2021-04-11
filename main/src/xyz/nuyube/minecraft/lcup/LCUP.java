@@ -2,9 +2,10 @@ package xyz.nuyube.minecraft.lcup;
 
 import java.util.logging.Logger;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import org.bukkit.Bukkit; 
 import org.bukkit.plugin.java.JavaPlugin;
+
+import de.jeff_media.updatechecker.UpdateChecker;
 
 public class LCUP extends JavaPlugin {
  
@@ -15,23 +16,7 @@ public class LCUP extends JavaPlugin {
   public void onEnable() {
     //Start our plugin logger
     PluginLogger = getLogger();
-    //Check for updates
-    new UpdateChecker(this, 91103)
-      .getVersion(
-          version -> {
-            if (
-              this.getDescription().getVersion().equalsIgnoreCase(version)
-            ) {} else {
-              Bukkit
-                .getConsoleSender()
-                .sendMessage(
-                  ChatColor.GREEN +
-                  "[Nuyube's LCUP] There is a new update available!"
-                );
-            }
-          }
-        ); 
-
+    UpdateChecker.init(this, 91103).checkNow();
     //Register our sellxp command and its alias 
     Bukkit.getPluginManager().registerEvents(new ChestOpenEventHandler(), this);
   }
@@ -43,4 +28,4 @@ public class LCUP extends JavaPlugin {
     PluginLogger = null;
   }
 
-}
+}   

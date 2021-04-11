@@ -6,7 +6,7 @@
 
   <groupId>xyz.nuyube.minecraft.lcup</groupId>
   <artifactId>LabeledChestUsePassthrough</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 
   <name>LabeledChestUsePassthrough</name>
   <packaging>jar</packaging>
@@ -20,6 +20,10 @@
           <id>spigot-repo</id>
           <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
       </repository> 
+    <repository>
+        <id>jeff-media-gbr</id>
+        <url>https://repo.jeff-media.de/maven2/</url>
+    </repository>
       </repositories>
   <dependencies>
       <dependency>
@@ -28,11 +32,17 @@
             <version>1.16.5-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
       </dependency> 
+    <dependency>
+        <groupId>de.jeff_media</groupId>
+        <artifactId>SpigotUpdateChecker</artifactId>
+        <version>1.0.0</version> <!-- Check on GitHub for the latest version -->
+        <scope>compile</scope>
+    </dependency>
   </dependencies>
 
   <build> 
     <sourceDirectory>
-    main
+    main/src
     </sourceDirectory>
     <resources>
       <resource>
@@ -42,5 +52,31 @@
         </includes>
       </resource>
     </resources>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>3.2.1</version>
+            <configuration>
+                <relocations>
+                    <!-- Using the maven-shade-plugin to shade and relocate the UpdateChecker -->
+                    <!-- Replace "your.package" with your plugin's package name -->
+                    <relocation>
+                        <pattern>de.jeff_media.updatechecker</pattern>
+                        <shadedPattern>xyz.nuyube.minecraft.lcup.updatechecker</shadedPattern>
+                    </relocation>
+                </relocations>
+            </configuration>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+
+    </plugins>
   </build>
 </project>
