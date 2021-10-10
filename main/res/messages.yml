@@ -1,0 +1,24 @@
+#Color codes are used with &&, not just &. This is to allow the use of & in the file without escaping.
+#Items in percents are replaced by the function that calls the output.
+
+#Empty messages are not sent.
+
+#miscellaneous
+enabling:
+enabled:
+disabling:
+disabled: Disabled.
+
+#errors 
+reload-no-permission: Sorry, but you don't have the &&cthegrind.reload&&f permission. 
+unspecified-error: %ERROR%
+
+#config
+config-not-found: Failed to read config. File Not Found.
+reading-config: Reading configuration file
+initializing-config: Initializing configuration...
+config-not-exist-writing: Config does not exist, writing.
+
+#global output 
+generic-done: Done.
+ 

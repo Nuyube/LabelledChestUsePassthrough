@@ -1,0 +1,4 @@
+config-version: 1
+
+#Enable the item frame handler that requires players to be sneaking
+enable-item-frame-handler: true
