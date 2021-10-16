@@ -46,7 +46,17 @@ class ChestOpenEventHandler implements Listener {
                 // Get info about the sign
                 Sign S = (Sign) clickedBlock.getState();
                 // Get the block attached to the sign
-                Directional a = (Directional) S.getBlockData();
+                Directional a = null;
+                try {
+                    a = (Directional) S.getBlockData();
+                } catch (ClassCastException ex) {
+                    if (!LCUP.getInstance().isFloorSignWarning()) {
+                        LCUP.PluginLogger.info(
+                                "Sign interact event ignored (sign is not a Directional (wall) sign). This message will not appear again.");
+                        LCUP.getInstance().setFloorSignWarning(true);
+                    }
+                    return;
+                }
                 Block Attached = clickedBlock.getRelative(a.getFacing().getOppositeFace());
                 handleBlockState(Attached, p);
             }

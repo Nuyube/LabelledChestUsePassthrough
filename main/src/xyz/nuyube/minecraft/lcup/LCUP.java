@@ -11,9 +11,28 @@ public class LCUP extends JavaPlugin {
 
     static Logger PluginLogger = null;
     private Messages messages;
+    private boolean floorSignWarning = false;
+
+    public boolean isFloorSignWarning() {
+        return floorSignWarning;
+    }
+
+    public void setFloorSignWarning(boolean b) {
+        floorSignWarning = b;
+    }
+
+    private static LCUP instance = null;
+
+    public static LCUP getInstance() {
+        if (instance == null)
+            instance = new LCUP();
+
+        return instance;
+    }
 
     @Override
     public void onEnable() {
+        instance = this;
         messages = Messages.getInstance();
         messages.init();
         messages.emitConsole("enabling");
