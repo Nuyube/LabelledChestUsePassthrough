@@ -45,10 +45,12 @@ class ChestOpenEventHandler implements Listener {
                 Player p = event.getPlayer();
                 // Get info about the sign
                 Sign S = (Sign) clickedBlock.getState();
-                // Get the block attached to the sign
-                Directional a = (Directional) S.getBlockData();
-                Block Attached = clickedBlock.getRelative(a.getFacing().getOppositeFace());
-                handleBlockState(Attached, p);
+                if (S instanceof Directional) {
+                    // Get the block attached to the sign
+                    Directional a = (Directional) S.getBlockData();
+                    Block Attached = clickedBlock.getRelative(a.getFacing().getOppositeFace());
+                    handleBlockState(Attached, p);
+                }
             }
         }
     }
