@@ -114,17 +114,25 @@ class ChestOpenEventHandler implements Listener {
 
     @EventHandler
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
+        // Check to see that the item frame handler is enabled
         if (Configuration.getInstance().isItemFrameEnabled()) {
+            // If we clicked on an itemframe
             if (event.getRightClicked() instanceof ItemFrame) {
+
                 ItemFrame frame = (ItemFrame) event.getRightClicked();
+                // And the player isn't sneaking
                 if (event.getPlayer().isSneaking())
                     return;
                 else {
+                    // Get the block it's attached to
                     Block frameblock = frame.getLocation().getBlock();
                     Block Attached = frameblock.getRelative(frame.getAttachedFace());
                     Player p = event.getPlayer();
+                    // If it's a container or ender chest,
                     if (Attached.getState() instanceof Container || Attached.getState() instanceof EnderChest) {
+                        // Cancel the event
                         event.setCancelled(true);
+                        // And run the inventory opener
                         handleBlockState(Attached, p);
                     }
                 }
