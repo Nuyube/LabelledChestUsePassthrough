@@ -89,7 +89,8 @@ class ChestOpenEventHandler implements Listener {
                         case SOUTH_SOUTH_WEST:
                             backFace = BlockFace.SOUTH;
                             break;
-                        // Should be a dead default if this is a sign as signs cannot face UP or DOWN.
+                        // This default case catches exactly diagonal signs (the chest they point
+                        // towards cannot be determined)
                         default:
                             return;
                         }
