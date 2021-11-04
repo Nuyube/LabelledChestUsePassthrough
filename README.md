@@ -1,9 +1,7 @@
-# SellXP
-A spigot plugin for 1.16.5 allowing users to sell their xp.
+# Labelled Chest Use Passthrough
+
+A plugin for Spigot that allows players to open containers by clicking on signs / item frames that are attached or standing next to them.
 
 # Building
-Open a shell in the project folder and run "mvn package"
-Then, move the generated jar file to your Spigot server.
 
-# Vault Dependency
-This plugin depends on Vault.
+Simply run 'mvn package' to build and package the jar.
