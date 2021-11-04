@@ -12,6 +12,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 final class Configuration {
     private boolean itemFrameEnabled = true;
+    private boolean floorSignEnabled = true;
+
+    public boolean isFloorSignEnabled() {
+        return floorSignEnabled;
+    }
 
     public boolean isItemFrameEnabled() {
         return itemFrameEnabled;
@@ -36,6 +41,9 @@ final class Configuration {
     }
 
     private final void readConfigFile() {
+        // TODO: Configuration files to not automatically repair themselves after
+        // updates. A project is in the works for this, but is not my priority at the
+        // moment.err
         Logger errorLogger = JavaPlugin.getPlugin(LCUP.class).getLogger();
         messages.emitConsole("reading-config");
         // Get files
@@ -52,7 +60,16 @@ final class Configuration {
             itemFrameEnabled = Boolean
                     .valueOf(JavaYAMLHelper.getValueFromKey("enable-item-frame-handler", fileContents));
         } catch (Exception e) {
-            errorLogger.severe(e.getMessage());
+            errorLogger.severe("Error reading enable-item-frame-handler: " + e.getMessage()
+                    + ". Failing to itemFrameEnabled=true");
+            itemFrameEnabled = true;
+        }
+        try {
+            floorSignEnabled = Boolean.valueOf(JavaYAMLHelper.getValueFromKey("enable-floor-signs", fileContents));
+        } catch (Exception e) {
+            errorLogger.severe(
+                    "Error reading enable-floor-signs: " + e.getMessage() + ". Failing to floorSignEnabled=true");
+            floorSignEnabled = true;
         }
     }
 

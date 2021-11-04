@@ -1,4 +1,7 @@
-config-version: 1
+config-version: 2
 
 #Enable the item frame handler that requires players to be sneaking
 enable-item-frame-handler: true
+
+#Enable floor signs
+enable-floor-signs: true
