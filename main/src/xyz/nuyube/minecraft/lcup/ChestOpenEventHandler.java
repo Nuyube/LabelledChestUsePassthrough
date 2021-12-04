@@ -1,5 +1,9 @@
 package xyz.nuyube.minecraft.lcup;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Container;
@@ -23,6 +27,7 @@ class ChestOpenEventHandler implements Listener {
         if (Attached.getState() instanceof EnderChest) {
             Inventory i = p.getEnderChest();
             p.openInventory(i);
+            p.playSound(p.getLocation(), Sound.BLOCK_ENDER_CHEST_OPEN, SoundCategory.BLOCKS, 1.0f, 1.0f);
             return true;
         }
         // Otherwise handle it like a container
@@ -38,6 +43,9 @@ class ChestOpenEventHandler implements Listener {
     @EventHandler
     // Hook the PlayerInteract event
     public void onPlayerInteract(PlayerInteractEvent event) {
+        LCUP.PluginLogger.info("Player interact event");
+        LCUP.PluginLogger.info(event.getClickedBlock().toString());
+        LCUP.PluginLogger.info(event.getAction().toString());
 
         Configuration config = Configuration.getInstance();
         // If we're right-clicking a block
@@ -69,30 +77,30 @@ class ChestOpenEventHandler implements Listener {
 
                         // Switch on its facing direction. Take the direction it's facing most toward
                         switch (backFace) {
-                        case EAST:
-                        case EAST_NORTH_EAST:
-                        case EAST_SOUTH_EAST:
-                            backFace = BlockFace.EAST;
-                            break;
-                        case WEST:
-                        case WEST_NORTH_WEST:
-                        case WEST_SOUTH_WEST:
-                            backFace = BlockFace.WEST;
-                            break;
-                        case NORTH:
-                        case NORTH_NORTH_EAST:
-                        case NORTH_NORTH_WEST:
-                            backFace = BlockFace.NORTH;
-                            break;
-                        case SOUTH:
-                        case SOUTH_SOUTH_EAST:
-                        case SOUTH_SOUTH_WEST:
-                            backFace = BlockFace.SOUTH;
-                            break;
-                        // This default case catches exactly diagonal signs (the chest they point
-                        // towards cannot be determined)
-                        default:
-                            return;
+                            case EAST:
+                            case EAST_NORTH_EAST:
+                            case EAST_SOUTH_EAST:
+                                backFace = BlockFace.EAST;
+                                break;
+                            case WEST:
+                            case WEST_NORTH_WEST:
+                            case WEST_SOUTH_WEST:
+                                backFace = BlockFace.WEST;
+                                break;
+                            case NORTH:
+                            case NORTH_NORTH_EAST:
+                            case NORTH_NORTH_WEST:
+                                backFace = BlockFace.NORTH;
+                                break;
+                            case SOUTH:
+                            case SOUTH_SOUTH_EAST:
+                            case SOUTH_SOUTH_WEST:
+                                backFace = BlockFace.SOUTH;
+                                break;
+                            // This default case catches exactly diagonal signs (the chest they point
+                            // towards cannot be determined)
+                            default:
+                                return;
                         }
                     } else {
                         // If this behavior was disabled, warn only once.
