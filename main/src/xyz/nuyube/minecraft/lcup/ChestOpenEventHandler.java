@@ -43,10 +43,6 @@ class ChestOpenEventHandler implements Listener {
     @EventHandler
     // Hook the PlayerInteract event
     public void onPlayerInteract(PlayerInteractEvent event) {
-        LCUP.PluginLogger.info("Player interact event");
-        LCUP.PluginLogger.info(event.getClickedBlock().toString());
-        LCUP.PluginLogger.info(event.getAction().toString());
-
         Configuration config = Configuration.getInstance();
         // If we're right-clicking a block
 
